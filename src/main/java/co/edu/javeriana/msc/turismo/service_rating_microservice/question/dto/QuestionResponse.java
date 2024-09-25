@@ -1,12 +1,17 @@
 package co.edu.javeriana.msc.turismo.service_rating_microservice.question.dto;
 
+import co.edu.javeriana.msc.turismo.service_rating_microservice.question.model.Answer;
+
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 public record QuestionResponse(
-        Long id,
+        String id,
+        Long serviceId,
         String content,
-        LocalDate date,
-        Long createdBy,
-        Long serviceId
+        String createdBy,
+        List<Answer> answers
+
 ) {
 }

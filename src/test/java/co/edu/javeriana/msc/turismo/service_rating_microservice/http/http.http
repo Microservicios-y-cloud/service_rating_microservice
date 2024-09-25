@@ -1,0 +1,19 @@
+###post question
+POST http://localhost:8082/questions
+Content-Type: application/json
+
+{
+  "serviceId": 1,
+  "content": "¿Cuál es la mejor playa de Colombia?, es que me queda esa pequeña duda",
+  "createdBy": "50f60693-b5a9-4f9f-90fc-9c710cdcd1b0"
+}
+
+
+###post answer to previous question
+POST http://localhost:8082/questions/66f369cfe6337878241c8e2e/answers
+Content-Type: application/json
+
+{
+  "content": "Recuerda que mi catálogo de servicios está 100% disponible para ti",
+  "createdBy": "524f9a80-156e-4ccb-b0ea-474dcb8664e7"
+}
