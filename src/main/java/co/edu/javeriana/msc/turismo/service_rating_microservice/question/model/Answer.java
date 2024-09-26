@@ -20,8 +20,8 @@ public class Answer {
     @NotNull(message = "The content of the answer is required")
     private String content;
     @CreatedBy
-    @NotNull(message = "The user id of the answer is required")
-    private String createdBy;
+    @NotNull(message = "The user of the answer is required")
+    private Person createdBy;
     @CreatedDate
     private LocalDateTime date;
 }

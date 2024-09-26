@@ -1,6 +1,7 @@
 package co.edu.javeriana.msc.turismo.service_rating_microservice.question.dto;
 
 import co.edu.javeriana.msc.turismo.service_rating_microservice.question.model.Answer;
+import co.edu.javeriana.msc.turismo.service_rating_microservice.question.model.Person;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
@@ -12,8 +13,8 @@ public record QuestionRequest(
         Long serviceId,
         @NotNull(message = "The content of the question is required")
         String content,
-        @NotNull(message = "The user id of the question is required")
-        String createdBy,
+        @NotNull(message = "The user of the question is required")
+        Person createdBy,
         List<Answer> answers
 
 ) {

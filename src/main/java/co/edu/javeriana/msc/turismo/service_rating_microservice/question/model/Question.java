@@ -30,7 +30,7 @@ public class Question {
 
     private String content;
     @CreatedBy
-    private String createdBy;
+    private Person createdBy;
 
     private List<Answer> answers;
 }
