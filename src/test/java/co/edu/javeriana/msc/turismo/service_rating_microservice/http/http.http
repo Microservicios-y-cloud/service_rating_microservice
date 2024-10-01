@@ -31,3 +31,6 @@ Content-Type: application/json
     "email": "customer1@mail.com"
   }
 }
+
+###
+GET http://localhost:8082/questions/service/1

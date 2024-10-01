@@ -6,7 +6,11 @@ import org.springframework.stereotype.Repository;
 
 import co.edu.javeriana.msc.turismo.service_rating_microservice.question.model.Question;
 
+import java.util.Arrays;
+import java.util.List;
+
 
 @Repository
 public interface QuestionRepository extends MongoRepository<Question, String> {
+    List<Question> findAllByServiceId(Long serviceId);
 }

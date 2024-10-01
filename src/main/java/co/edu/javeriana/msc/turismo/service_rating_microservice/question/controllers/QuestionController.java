@@ -68,4 +68,11 @@ public class QuestionController {
         QuestionResponse updatedQuestion = questionService.addAnswerToQuestion(questionId, answerRequest);
         return ResponseEntity.ok(updatedQuestion);
     }
+
+    //obtener todas las preguntas de un mismo serviceId
+    @GetMapping("/service/{service-id}")
+    public ResponseEntity<List<QuestionResponse>> findAllByServiceId(
+            @PathVariable("service-id") Long serviceId) {
+        return ResponseEntity.ok(questionService.findAllByServiceId(serviceId));
+    }
 }

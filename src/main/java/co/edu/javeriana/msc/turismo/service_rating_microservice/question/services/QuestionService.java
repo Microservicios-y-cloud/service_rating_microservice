@@ -80,4 +80,11 @@ public class QuestionService{
     // Devolver la respuesta actualizada
     return mapper.toQuestionResponse(question);
   }
+
+  public List<QuestionResponse> findAllByServiceId(Long serviceId) {
+    return repository.findAllByServiceId(serviceId)
+            .stream()
+            .map(mapper::toQuestionResponse)
+            .collect(Collectors.toList());
+  }
 }
