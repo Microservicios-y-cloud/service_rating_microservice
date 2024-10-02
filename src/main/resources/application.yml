@@ -4,8 +4,25 @@ spring:
     # Use '-' instead
     # Otherwise gateway may not work correctly
     name: service-rating-microservice
+  jackson:
+      default-property-inclusion: non_null
 
   config:
     import: configserver:http://localhost:8888
-
-
+  # Message queue
+  cloud:
+    stream:
+      kafka:
+        binder:
+          # Kafka server URL
+          # 9092 is the default port of Kafka
+          brokers: localhost:9092
+      bindings:
+        # https://docs.spring.io/spring-cloud-stream/reference/spring-cloud-stream/functional-binding-names.htm
+        # Format: <method name>-<in or out>-<index>
+        # sendMessage: name of the method that sends the message
+        # out: because is a consumer
+        # 0: Index of the binding. This makes sense when the same method sends to multiple queues
+        receiveMessage-in-0:
+          destination: query-services-queue
+          group: service-group-2

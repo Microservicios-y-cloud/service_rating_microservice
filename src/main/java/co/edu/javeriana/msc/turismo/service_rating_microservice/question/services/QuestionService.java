@@ -4,6 +4,7 @@ import co.edu.javeriana.msc.turismo.service_rating_microservice.question.model.A
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import co.edu.javeriana.msc.turismo.service_rating_microservice.question.dto.QuestionRequest;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 
 public class QuestionService{
   

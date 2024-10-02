@@ -40,8 +40,7 @@ public class QuestionController {
     @PostMapping
     public ResponseEntity<String> createQuestion(
             @Valid @RequestBody QuestionRequest questionRequest) {
-        String createdQuestionId = questionService.createQuestion(questionRequest);
-        return new ResponseEntity<>(createdQuestionId, HttpStatus.CREATED);
+        return ResponseEntity.ok(questionService.createQuestion(questionRequest));
     }
 
     // Actualizar el contenido de una pregunta existente
