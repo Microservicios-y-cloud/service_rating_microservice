@@ -1,6 +1,7 @@
 package co.edu.javeriana.msc.turismo.service_rating_microservice.question.services;
 
 import co.edu.javeriana.msc.turismo.service_rating_microservice.question.model.Answer;
+import co.edu.javeriana.msc.turismo.service_rating_microservice.queue.repository.SuperServiceRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +26,12 @@ public class QuestionService{
   
   private final QuestionRepository repository;
   private final QuestionMapper mapper;
+  private final SuperServiceRepository superServiceRepository;
 
   public String createQuestion (@Valid QuestionRequest request) {
+    if(!superServiceRepository.existsById(request.serviceId())){
+      throw new EntityNotFoundException("Service not found with id: " + request.serviceId());
+    }
     var Question = repository.save(mapper.toQuestion(request));
     return Question.getId();
   }
@@ -48,6 +53,9 @@ public class QuestionService{
     var question = repository.findById(questionId)
             .orElseThrow(() -> new EntityNotFoundException("Question not found with id: " + questionId));
 
+    if(!superServiceRepository.existsById(question.getServiceId())){
+      throw new EntityNotFoundException("Service not found with id: " + question.getServiceId());
+    }
     // Actualizar solo el contenido de la pregunta
     question.setContent(questionRequest.content());
     question.setLastUpdate(LocalDateTime.now());
@@ -67,6 +75,9 @@ public class QuestionService{
     var question = repository.findById(questionId)
             .orElseThrow(() -> new EntityNotFoundException("Question not found with id: " + questionId));
 
+    if(!superServiceRepository.existsById(question.getServiceId())){
+      throw new EntityNotFoundException("Service not found with id: " + question.getServiceId());
+    }
     //añadir fecha de creación a la respuesta
     answerRequest.setDate(LocalDateTime.now());
     // Añadir la respuesta a la lista de respuestas de la pregunta
