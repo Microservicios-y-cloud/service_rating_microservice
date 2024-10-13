@@ -38,7 +38,7 @@ public class QuestionController {
 
     // Crear una nueva pregunta
     @PostMapping
-    public ResponseEntity<String> createQuestion(
+    public ResponseEntity<String> createQuestion( 
             @Valid @RequestBody QuestionRequest questionRequest) {
         return ResponseEntity.ok(questionService.createQuestion(questionRequest));
     }

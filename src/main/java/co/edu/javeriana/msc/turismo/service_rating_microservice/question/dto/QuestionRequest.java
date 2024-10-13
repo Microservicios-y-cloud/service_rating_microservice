@@ -3,8 +3,6 @@ package co.edu.javeriana.msc.turismo.service_rating_microservice.question.dto;
 import co.edu.javeriana.msc.turismo.service_rating_microservice.question.model.Answer;
 import co.edu.javeriana.msc.turismo.service_rating_microservice.question.model.Person;
 import jakarta.validation.constraints.NotNull;
-
-import java.time.LocalDate;
 import java.util.List;
 
 public record QuestionRequest(

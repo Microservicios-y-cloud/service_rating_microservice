@@ -11,6 +11,8 @@ spring:
     import: configserver:http://localhost:8888
   # Message queue
   cloud:
+    function:
+      definition: receiveMessage;receiveOrderQualification
     stream:
       kafka:
         binder:
@@ -25,4 +27,7 @@ spring:
         # 0: Index of the binding. This makes sense when the same method sends to multiple queues
         receiveMessage-in-0:
           destination: query-services-queue
+          group: service-group-2
+        receiveOrderQualification-in-0:
+          destination: order-qualification-queue
           group: service-group-2
