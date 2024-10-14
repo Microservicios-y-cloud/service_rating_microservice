@@ -25,9 +25,9 @@ public class CommentService {
     private final HistoricoServiciosRepository historicoServiciosRepository;
 
     public String createComment(CommentRequest request) {
-        var historico = historicoServiciosRepository.findAllByUserId(request.createdBy().getId());
-        if(!superServiceRepository.existsById(request.serviceId()) && historico.isEmpty()){
-            throw new EntityNotFoundException("Service not found with id: " + request.serviceId() + "Or user not found with id: " + request.createdBy().getId());
+        var historico = historicoServiciosRepository.findById(request.createdBy().getId());
+        if(!superServiceRepository.existsById(request.serviceId()) || historico.isEmpty()){
+            throw new EntityNotFoundException("Service not found with id: " + request.serviceId() + ". Or user not found with id: " + request.createdBy().getId());
         }
         Comment comment = commentMapper.toComment(request);
         comment.setDate(LocalDateTime.now());

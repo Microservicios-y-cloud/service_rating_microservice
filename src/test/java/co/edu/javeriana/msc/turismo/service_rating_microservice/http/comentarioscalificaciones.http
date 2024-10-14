@@ -1,0 +1,17 @@
+POST http://localhost:8082/comments
+Content-Type: application/json
+
+{
+  "serviceId": 1,
+  "qualification": 4,
+  "createdBy": {
+    "id": "0e9db4d0-917c-4d5b-9c76-15c9a26204cb",
+    "userType": "customer",
+    "username": "nicolastest",
+    "firstName": "nicolas",
+    "lastName": "test",
+    "email": "nicolastest@gmail.com"
+    
+  },
+  "content": "Me encantó el servicio, lo recomiendo"
+}
