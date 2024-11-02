@@ -28,7 +28,8 @@ public class CommentMapper {
                         comment.getServiceId(),
                         comment.getQualification(),
                         comment.getCreatedBy(),
-                        comment.getContent()
+                        comment.getContent(),
+                        comment.getDate()
                 );
     }
 }

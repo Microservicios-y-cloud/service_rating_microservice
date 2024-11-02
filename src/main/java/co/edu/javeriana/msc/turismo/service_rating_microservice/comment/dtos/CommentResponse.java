@@ -1,5 +1,7 @@
 package co.edu.javeriana.msc.turismo.service_rating_microservice.comment.dtos;
 
+import java.time.LocalDateTime;
+
 import co.edu.javeriana.msc.turismo.service_rating_microservice.comment.enums.Qualification;
 
 public record CommentResponse(
@@ -7,6 +9,7 @@ public record CommentResponse(
     Long serviceId,
     Qualification qualification,
     Customer createdBy,
-    String content
+    String content,
+    LocalDateTime date
 ) {
 }

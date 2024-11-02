@@ -14,6 +14,7 @@ import co.edu.javeriana.msc.turismo.service_rating_microservice.comment.reposito
 import co.edu.javeriana.msc.turismo.service_rating_microservice.queue.repository.SuperServiceRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -29,6 +30,7 @@ public class CommentService {
         if(!superServiceRepository.existsById(request.serviceId()) || historico.isEmpty()){
             throw new EntityNotFoundException("Service not found with id: " + request.serviceId() + ". Or user not found with id: " + request.createdBy().getId());
         }
+        
         //TODO terminar lógica para validar que el usuario que se envía si compró un servicio, es decir, revisar en el histórico la compra, si no no se puede efectuar el rating
 //        var servicio = superServiceRepository.findById(request.serviceId());
 //        for (var item : historico.get().getPurchasedItems()) {
@@ -39,6 +41,18 @@ public class CommentService {
         //TODO verificar que la fecha actual, en la que se hace el request, es mayor a la fecha de compra del servicio y de inicio del servicio
 //        var fechaActual = LocalDateTime.now();
 //        var fechaCompra
+//        Fecha válida
+        if(request.date().isAfter(LocalDateTime.now())){
+            throw new IllegalArgumentException("The date of the comment cannot be greater than the current date");
+        }
+        //Fecha comparada con servicio
+        if(request.date().isBefore(historico.get().getCreationDate())){
+            throw new IllegalArgumentException("The date of the comment cannot be less than the start date of the service");
+        }
+        //Validación de que el usuario compró el servicio al que le va a hacer review
+        if(!historico.get().getPurchasedItems().stream().anyMatch(purchasedItem -> purchasedItem.service().id().equals(request.serviceId()))){
+            throw new IllegalArgumentException("The user did not buy the service to be rated");
+        }
 
         Comment comment = commentMapper.toComment(request);
         comment.setDate(LocalDateTime.now());
