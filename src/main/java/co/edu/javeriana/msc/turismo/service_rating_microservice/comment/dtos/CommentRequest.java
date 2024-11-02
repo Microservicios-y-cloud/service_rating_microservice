@@ -2,6 +2,7 @@ package co.edu.javeriana.msc.turismo.service_rating_microservice.comment.dtos;
 
 import co.edu.javeriana.msc.turismo.service_rating_microservice.comment.enums.Qualification;
 import jakarta.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 public record CommentRequest(
         String id,
@@ -11,6 +12,7 @@ public record CommentRequest(
         Qualification qualification,
         @NotNull(message = "The user of the comment is required")
         Customer createdBy,
-        String content
+        String content,
+        LocalDateTime date
 ) {
 }
