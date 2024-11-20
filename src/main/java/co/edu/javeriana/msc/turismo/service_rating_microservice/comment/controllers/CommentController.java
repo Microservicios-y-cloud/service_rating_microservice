@@ -51,4 +51,10 @@ public class CommentController {
         commentService.deleteComment(commentId);
         return ResponseEntity.noContent().build();  // Devuelve 204 No Content
     }
+
+    @GetMapping("/service/{service-id}")
+    public ResponseEntity<List<CommentResponse>> getCommentsByService(
+            @PathVariable("service-id") Long serviceId) {
+        return ResponseEntity.ok(commentService.findByServiceId(serviceId));
+    }
 }

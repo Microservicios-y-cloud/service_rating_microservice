@@ -106,4 +106,14 @@ public class CommentService {
                 .orElseThrow();
         
     }
+
+    public List<CommentResponse> findByServiceId(Long serviceId) {
+        if (!superServiceRepository.existsById(serviceId)) {
+            throw new EntityNotFoundException("Service not found with id: " + serviceId);
+        }
+        return commentRepository.findAllByServiceId(serviceId)
+                .stream()
+                .map(commentMapper::toCommentResponse)
+                .collect(Collectors.toList());
+    }
 }
